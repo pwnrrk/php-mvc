@@ -10,18 +10,14 @@ class HomeController extends Controller
 {
   public function index()
   {
-    $journals = [
-      new Journal("Third Journal Entry", "2024"),
-      new Journal("Second Journal Entry", "2023"),
-      new Journal("First Journal Entry", "2022"),
-    ];
+    $journals = Journal::getAll();
 
     return React::render("Home", ["journals" => $journals]);
   }
 
-  public function show()
+  public function show($params)
   {
-    $journal = new Journal("First Journal Entry", "2022");
+    $journal = Journal::getById($params['id']);
     return React::render("Journal", ["journal" => $journal]);
   }
 }

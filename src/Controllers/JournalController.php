@@ -9,12 +9,14 @@ class JournalController extends Controller
 {
   public function index()
   {
-    $journals = [
-      new Journal("Third Journal Entry", "2024"),
-      new Journal("Second Journal Entry", "2023"),
-      new Journal("First Journal Entry", "2022"),
-    ];
+    $journals = Journal::getAll();
 
     $this->json($journals);
+  }
+
+  public function show($params)
+  {
+    $journal = Journal::getById($params['id']);
+    $this->json($journal);
   }
 }

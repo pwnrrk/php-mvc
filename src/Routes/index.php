@@ -7,6 +7,7 @@ use App\Router;
 $router = new Router();
 
 $router->get("/", HomeController::class, 'index');
-$router->get("/view", HomeController::class, 'show');
+$router->get("/view/{id}", HomeController::class, 'show');
 $router->get("/api/journals", JournalController::class, 'index');
+$router->get("/api/journals/{id}", JournalController::class, 'show');
 $router->dispatch();
