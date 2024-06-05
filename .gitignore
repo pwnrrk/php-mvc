@@ -1,0 +1,21 @@
+# Ignore composer dependencies
+/vendor/
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore any log files
+*.log
+
+# Ignore environment configuration files
+.env
+
+# Ignore any compiled PHP files
+*.phpc
+
+# Ignore any temporary files
+*.tmp
+
+# Ignore any user-specific files
+.DS_Store
+Thumbs.db
