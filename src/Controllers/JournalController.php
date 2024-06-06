@@ -25,7 +25,7 @@ class JournalController extends Controller
     $data = $this->body() ?? $_REQUEST;
     $journal = new Journal($data['name'], $data['publishedDate']);
     $journal->save();
-    $this->json($data);
+    $this->json($journal);
   }
 
   public function destroy($params)

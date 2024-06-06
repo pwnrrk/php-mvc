@@ -30,21 +30,15 @@ export default function Home({ journals }: { journals: Journal[] }) {
       body: JSON.stringify(data),
     });
 
-    const body =
-      res.headers.get("Content-Type") === "application/json"
-        ? await res.json()
-        : await res.text();
-
     if (res.ok) {
+      const newData = await res.json();
       setData((old) => {
-        return [...old, data];
+        return [...old, newData];
       });
       reset();
     } else {
       window.alert("Save failed.");
     }
-
-    console.log(body);
   }
 
   async function deleteJournal(id: string) {
