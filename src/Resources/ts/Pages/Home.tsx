@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Link from "../components/Link";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import Checkbox from "../components/Checkbox";
 
 interface Journal {
@@ -12,7 +12,9 @@ interface Journal {
 
 export default function Home({ journals }: { journals: Journal[] }) {
   const [data, setData] = useState<Journal[]>(journals);
-  const { register, handleSubmit, reset } = useForm<Journal>();
+  const { register, handleSubmit, reset, control, watch } = useForm<
+    Journal & { keepForm: boolean }
+  >();
 
   data.sort(function (a, b) {
     if (a.publishedYear < b.publishedYear) return 1;
@@ -48,7 +50,11 @@ export default function Home({ journals }: { journals: Journal[] }) {
             ))}
           </ul>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          method="POST"
+          onSubmit={watch("keepForm") ? handleSubmit(onSubmit) : undefined}
+          action="/api/journals"
+        >
           <b>Add Journals</b>
           <Input label="Name" required {...register("name")} />
           <Input
@@ -57,7 +63,18 @@ export default function Home({ journals }: { journals: Journal[] }) {
             type="date"
             {...register("publishedYear")}
           />
-          <Checkbox label="Keep the form open" />
+          <Controller
+            control={control}
+            name="keepForm"
+            render={function ({ field }) {
+              return (
+                <Checkbox
+                  label="Keep the form open"
+                  onChange={(checked) => field.onChange(checked)}
+                />
+              );
+            }}
+          />
           <Button type="submit">Submit</Button>
         </form>
       </div>

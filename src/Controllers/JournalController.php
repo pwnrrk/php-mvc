@@ -19,4 +19,10 @@ class JournalController extends Controller
     $journal = Journal::getById($params['id']);
     $this->json($journal);
   }
+
+  public function create()
+  {
+    $this->json($_REQUEST);
+  }
 }
+ 
