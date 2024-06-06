@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../components/Button";
-import Link from "../components/Link";
 import { PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 
 export interface Journal {
@@ -35,7 +34,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
       <b>Journals</b>
       <Button
         className={"text-xs ml-2"}
-        onClick={() => (window.location.href = "/create")}
+        onClick={() => (window.location.href = "create")}
       >
         <PlusIcon className="size-4" />
         Add New
@@ -43,7 +42,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
       <ul>
         {journals.map((journal, index) => (
           <li key={index}>
-            <a href={`/view/${journal.id}`}>
+            <a href={`view/${journal.id}`}>
               {journal.name} (
               {journal.publishedDate &&
                 new Date(journal.publishedDate).toLocaleDateString([], {

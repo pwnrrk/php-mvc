@@ -8,7 +8,7 @@ export default function CreateJournal() {
   const { register, handleSubmit } = useForm<Journal>();
 
   async function onSubmit(data: Journal) {
-    const res = await fetch("/api/journals", {
+    const res = await fetch("api/journals", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export default function CreateJournal() {
     });
 
     if (res.ok) {
-      window.location.href = "/";
+      window.location.href = "";
     } else {
       window.alert("Save failed.");
     }
