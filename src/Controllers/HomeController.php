@@ -20,4 +20,9 @@ class HomeController extends Controller
     $journal = Journal::getById($params['id']);
     return React::render("Journal", ["journal" => $journal]);
   }
+
+  public function create()
+  {
+    return React::render("CreateJournal");
+  }
 }

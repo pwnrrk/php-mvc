@@ -8,6 +8,6 @@ class React
   {
     $json = json_encode($data);
     include "Views/main.php";
-    echo "<script defer>document.onload = window.render('$component', JSON.parse('$json'))</script>";
+    echo "<script defer id='react-renderer'>document.onload = window.render('$component', JSON.parse('$json'))</script>";
   }
 }

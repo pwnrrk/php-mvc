@@ -23,7 +23,7 @@ class JournalController extends Controller
   public function create()
   {
     $data = $this->body() ?? $_REQUEST;
-    $journal = new Journal($data['name'], $data['publishedDate']);
+    $journal = new Journal($data['name'], date("Y-m-d"));
     $journal->save();
     $this->json($journal);
   }

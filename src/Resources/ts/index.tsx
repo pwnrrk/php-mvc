@@ -6,4 +6,5 @@ import { createRoot } from "react-dom/client";
   const root = createRoot(document.getElementById("app") as HTMLElement);
   const Page = require(`./Pages/${page}`).default;
   root.render(<Page {...props} />);
+  document.getElementById("react-renderer")?.remove();
 };

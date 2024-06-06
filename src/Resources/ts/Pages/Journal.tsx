@@ -7,7 +7,7 @@ export default function Journal({ journal }: { journal: Journal }) {
   }, []);
 
   return (
-    <div className="max-w-xl mx-auto">
+    <article className="prose m-4">
       <h1 className="text-3xl mb-4">{journal.name}</h1>
       <b className="text-black/60">
         {journal.publishedDate &&
@@ -15,6 +15,6 @@ export default function Journal({ journal }: { journal: Journal }) {
             dateStyle: "medium",
           })}
       </b>
-    </div>
+    </article>
   );
 }

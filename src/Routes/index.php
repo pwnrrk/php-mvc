@@ -7,6 +7,7 @@ use App\Router;
 $router = new Router();
 
 $router->get("/", HomeController::class, 'index');
+$router->get("/create", HomeController::class, 'create');
 $router->get("/view/{id}", HomeController::class, 'show');
 $router->get("/api/journals", JournalController::class, 'index');
 $router->post("/api/journals", JournalController::class, 'create');

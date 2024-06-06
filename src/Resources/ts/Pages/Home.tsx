@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
-import Input from "../components/Input";
 import Link from "../components/Link";
-import { useForm } from "react-hook-form";
-import { TrashIcon } from "@heroicons/react/16/solid";
+import { PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
 
 export interface Journal {
   id: string;
@@ -12,90 +10,59 @@ export interface Journal {
 }
 
 export default function Home({ journals }: { journals: Journal[] }) {
-  const [data, setData] = useState<Journal[]>(journals);
-  const { register, handleSubmit, reset } = useForm<Journal>();
-
-  data.sort(function (a, b) {
+  journals.sort(function (a, b) {
     if (a.publishedDate < b.publishedDate) return 1;
     if (a.publishedDate > b.publishedDate) return -1;
     return 0;
   });
 
-  async function onSubmit(data: Journal) {
-    const res = await fetch("/api/journals", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (res.ok) {
-      const newData = await res.json();
-      setData((old) => {
-        return [...old, newData];
-      });
-      reset();
-    } else {
-      window.alert("Save failed.");
-    }
-  }
-
   async function deleteJournal(id: string) {
-    const res = await fetch(`/api/journals/${id}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      setData((old) => {
-        return old.filter((row) => row.id !== id);
+    if (window.confirm("Delete ?")) {
+      const res = await fetch(`/api/journals/${id}`, {
+        method: "DELETE",
       });
-    } else {
-      window.alert("Delete failed.");
+      if (res.ok) {
+        window.location.reload();
+      } else {
+        window.alert("Delete failed.");
+      }
     }
   }
 
   return (
-    <div className="w-full max-w-xl m-auto">
-      <div className="shadow border p-4 rounded mt-4">
-        <h1 className="text-3xl mb-4">PHP MVC + React</h1>
-        <div className="mb-2">
-          <b>Journals</b>
-          <ul>
-            {data.map((journal, index) => (
-              <li key={index}>
-                <Link href={`/view/${journal.id}`}>
-                  {journal.name} (
-                  {journal.publishedDate &&
-                    new Date(journal.publishedDate).toLocaleDateString([], {
-                      dateStyle: "medium",
-                    })}
-                  )
-                </Link>
-                <Button
-                  title="Delete"
-                  className={
-                    "ml-2 px-0 py-0 w-6 h-6 items-center justify-center bg-transparent shadow-none border-none hover:bg-red-100"
-                  }
-                  onClick={() => deleteJournal(journal.id)}
-                >
-                  <TrashIcon className="size-3 fill-red-600" />
-                </Button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <b>Add Journals</b>
-          <Input label="Name" required {...register("name")} />
-          <Input
-            label="Year"
-            required
-            type="date"
-            {...register("publishedDate")}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </div>
-    </div>
+    <article className="m-4 prose">
+      <h1 className="text-3xl mb-4">PHP MVC + React</h1>
+      <b>Journals</b>
+      <Button
+        className={"text-xs ml-2"}
+        onClick={() => (window.location.href = "/create")}
+      >
+        <PlusIcon className="size-4" />
+        Add New
+      </Button>
+      <ul>
+        {journals.map((journal, index) => (
+          <li key={index}>
+            <a href={`/view/${journal.id}`}>
+              {journal.name} (
+              {journal.publishedDate &&
+                new Date(journal.publishedDate).toLocaleDateString([], {
+                  dateStyle: "medium",
+                })}
+              )
+            </a>
+            <Button
+              title="Delete"
+              className={
+                "ml-2 px-0 py-0 w-6 h-6 items-center justify-center bg-transparent shadow-none border-none hover:bg-red-100"
+              }
+              onClick={() => deleteJournal(journal.id)}
+            >
+              <TrashIcon className="size-3 fill-red-600" />
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </article>
   );
 }

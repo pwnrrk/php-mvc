@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
     "@webpack-cli/generators": "^3.0.7",
     "autoprefixer": "^10.4.19",
     "css-loader": "^7.1.2",
