@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import Link from "../components/Link";
 import { useForm } from "react-hook-form";
+import Checkbox from "../components/Checkbox";
 
 interface Journal {
   name: string;
@@ -56,6 +57,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
             type="date"
             {...register("publishedYear")}
           />
+          <Checkbox label="Keep the form open" />
           <Button type="submit">Submit</Button>
         </form>
       </div>

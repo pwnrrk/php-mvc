@@ -20,7 +20,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function (
       ref={ref}
       {...props}
       className={clsx(
-        "transition inline-flex items-center gap-2 rounded-md py-1 px-3 text-sm/6 border border-black/20",
+        "transition inline-flex items-center gap-2 rounded-md py-1 px-3 text-sm/6 border border-black/20 outline-none",
         "disabled:pointer-events-none disabled:select-none",
         "font-semibold  shadow focus:ring ",
         variant === "primary" &&
