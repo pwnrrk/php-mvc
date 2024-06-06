@@ -1,13 +1,17 @@
 import React, { FormEvent, useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import Link from "../components/Link";
+import { useForm } from "react-hook-form";
 
-export default function Home({
-  journals,
-}: {
-  journals: Record<string, any>[];
-}) {
-  const [data, setData] = useState(journals);
+interface Journal {
+  name: string;
+  publishedYear: string;
+}
+
+export default function Home({ journals }: { journals: Journal[] }) {
+  const [data, setData] = useState<Journal[]>(journals);
+  const { register, handleSubmit, reset } = useForm<Journal>();
 
   data.sort(function (a, b) {
     if (a.publishedYear < b.publishedYear) return 1;
@@ -15,19 +19,11 @@ export default function Home({
     return 0;
   });
 
-  function handleSubmit(ev: FormEvent<HTMLFormElement>) {
-    ev.preventDefault();
+  function onSubmit(data: Journal) {
     setData((old) => {
-      return [
-        ...old,
-        {
-          name: ev.target["name"]?.value,
-          publishedYear: ev.target["publishedYear"]?.value,
-        },
-      ];
+      return [...old, data];
     });
-    ev.currentTarget.reset();
-    ev.target["name"]?.focus();
+    reset();
   }
 
   return (
@@ -39,20 +35,27 @@ export default function Home({
           <ul>
             {data.map((journal, index) => (
               <li key={index}>
-                {journal.name} (
-                {journal.publishedYear &&
-                  new Date(journal.publishedYear).toLocaleDateString([], {
-                    year: "numeric",
-                  })}
-                )
+                <Link href={`/view/${index}`}>
+                  {journal.name} (
+                  {journal.publishedYear &&
+                    new Date(journal.publishedYear).toLocaleDateString([], {
+                      year: "numeric",
+                    })}
+                  )
+                </Link>
               </li>
             ))}
           </ul>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <b>Add Journals</b>
-          <Input label="Name" name="name" required />
-          <Input label="Year" name="publishedYear" required type="date" />
+          <Input label="Name" required {...register("name")} />
+          <Input
+            label="Year"
+            required
+            type="date"
+            {...register("publishedYear")}
+          />
           <Button type="submit">Submit</Button>
         </form>
       </div>
