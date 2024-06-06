@@ -43,7 +43,7 @@ class Controller
    * @param string $str The string to send.
    * @return void
    */
-  protected function send($str)
+  protected function send($str = null)
   {
     echo $str;
   }

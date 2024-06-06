@@ -14,7 +14,7 @@ class JournalController extends Controller
     $this->json($journals);
   }
 
-  public function show($params)
+  public function get($params)
   {
     $journal = Journal::getById($params['id']);
     $this->json($journal);
@@ -26,5 +26,13 @@ class JournalController extends Controller
     $journal = new Journal($data['name'], $data['publishedDate']);
     $journal->save();
     $this->json($data);
+  }
+
+  public function destroy($params)
+  {
+    $id = $params['id'];
+    $journal = Journal::getById($id);
+    $journal->destroy();
+    $this->status(204)->send();
   }
 }

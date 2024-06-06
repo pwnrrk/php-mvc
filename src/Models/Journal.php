@@ -54,4 +54,17 @@ class Journal
     file_put_contents(Storage::path("journals.json"), $json);
     return true;
   }
+
+  public function destroy()
+  {
+    $journals = Journal::getAll();
+    $index = false;
+    foreach ($journals as $key => $row) {
+      if ($row->id == $this->id) $index = $key;
+    }
+    array_splice($journals, $index, 1);
+    $json = json_encode($journals);
+    file_put_contents(Storage::path("journals.json"), $json);
+    return true;
+  }
 }

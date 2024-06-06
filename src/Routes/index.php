@@ -10,5 +10,6 @@ $router->get("/", HomeController::class, 'index');
 $router->get("/view/{id}", HomeController::class, 'show');
 $router->get("/api/journals", JournalController::class, 'index');
 $router->post("/api/journals", JournalController::class, 'create');
-$router->get("/api/journals/{id}", JournalController::class, 'show');
+$router->get("/api/journals/{id}", JournalController::class, 'get');
+$router->delete("/api/journals/{id}", JournalController::class, "destroy");
 $router->dispatch();
