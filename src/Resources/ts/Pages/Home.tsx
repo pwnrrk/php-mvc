@@ -1,32 +1,49 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import Link from "../components/Link";
-import { Controller, useForm } from "react-hook-form";
-import Checkbox from "../components/Checkbox";
+import { useForm } from "react-hook-form";
 
-interface Journal {
+export interface Journal {
+  id: string;
   name: string;
-  publishedYear: string;
+  publishedDate: string;
 }
 
 export default function Home({ journals }: { journals: Journal[] }) {
   const [data, setData] = useState<Journal[]>(journals);
-  const { register, handleSubmit, reset, control, watch } = useForm<
-    Journal & { keepForm: boolean }
-  >();
+  const { register, handleSubmit, reset } = useForm<Journal>();
 
   data.sort(function (a, b) {
-    if (a.publishedYear < b.publishedYear) return 1;
-    if (a.publishedYear > b.publishedYear) return -1;
+    if (a.publishedDate < b.publishedDate) return 1;
+    if (a.publishedDate > b.publishedDate) return -1;
     return 0;
   });
 
-  function onSubmit(data: Journal) {
-    setData((old) => {
-      return [...old, data];
+  async function onSubmit(data: Journal) {
+    const res = await fetch("/api/journals", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
-    reset();
+
+    const body =
+      res.headers.get("Content-Type") === "application/json"
+        ? await res.json()
+        : await res.text();
+
+    if (res.ok) {
+      setData((old) => {
+        return [...old, data];
+      });
+      reset();
+    } else {
+      window.alert("Save failed.");
+    }
+
+    console.log(body);
   }
 
   return (
@@ -38,11 +55,11 @@ export default function Home({ journals }: { journals: Journal[] }) {
           <ul>
             {data.map((journal, index) => (
               <li key={index}>
-                <Link href={`/view/${index}`}>
+                <Link href={`/view/${journal.id}`}>
                   {journal.name} (
-                  {journal.publishedYear &&
-                    new Date(journal.publishedYear).toLocaleDateString([], {
-                      year: "numeric",
+                  {journal.publishedDate &&
+                    new Date(journal.publishedDate).toLocaleDateString([], {
+                      dateStyle: "medium",
                     })}
                   )
                 </Link>
@@ -50,30 +67,14 @@ export default function Home({ journals }: { journals: Journal[] }) {
             ))}
           </ul>
         </div>
-        <form
-          method="POST"
-          onSubmit={watch("keepForm") ? handleSubmit(onSubmit) : undefined}
-          action="/api/journals"
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <b>Add Journals</b>
           <Input label="Name" required {...register("name")} />
           <Input
             label="Year"
             required
             type="date"
-            {...register("publishedYear")}
-          />
-          <Controller
-            control={control}
-            name="keepForm"
-            render={function ({ field }) {
-              return (
-                <Checkbox
-                  label="Keep the form open"
-                  onChange={(checked) => field.onChange(checked)}
-                />
-              );
-            }}
+            {...register("publishedDate")}
           />
           <Button type="submit">Submit</Button>
         </form>

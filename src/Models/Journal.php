@@ -2,36 +2,56 @@
 
 namespace App\Models;
 
+use App\Storage;
+
 class Journal
 {
+  public $id;
   public $name;
-  public $publishedYear;
+  public $publishedDate;
 
-  public function __construct($name, $publishedYear)
+  public function __construct($name, $publishedDate)
   {
+    $this->id = uniqid();
     $this->name = $name;
-    $this->publishedYear = $publishedYear;
+    $this->publishedDate = $publishedDate;
   }
 
+  /**
+   * @return Journal[]
+   */
   public static function getAll()
   {
-    $journals = [
-      new Journal("Third Journal Entry", "2024"),
-      new Journal("Second Journal Entry", "2023"),
-      new Journal("First Journal Entry", "2022"),
-    ];
-
+    $json = file_get_contents(Storage::path("journals.json"));
+    $data = json_decode($json, true);
+    $journals = [];
+    foreach ($data as $row) {
+      $journal = new Journal($row['name'], $row['publishedDate']);
+      $journal->id = $row['id'];
+      array_push($journals, $journal);
+    }
     return $journals;
   }
 
   public static function getById($id)
   {
-    $journals = [
-      new Journal("Third Journal Entry", "2024"),
-      new Journal("Second Journal Entry", "2023"),
-      new Journal("First Journal Entry", "2022"),
-    ];
+    $journals = Journal::getAll();
 
-    return $journals[$id];
+    $index = false;
+
+    foreach ($journals as $key => $row) {
+      if ($row->id == $id) $index = $key;
+    }
+
+    return $journals[$index];
+  }
+
+  public function save()
+  {
+    $journals = Journal::getAll();
+    array_push($journals, $this);
+    $json = json_encode($journals);
+    file_put_contents(Storage::path("journals.json"), $json);
+    return true;
   }
 }

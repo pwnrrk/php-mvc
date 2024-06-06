@@ -88,4 +88,26 @@ class Controller
       throw new \Exception("No such file or directory");
     }
   }
+
+  /**
+   * Retrieves JSON data from the request body.
+   *
+   * @return mixed|array|false Returns the decoded JSON data if successful, or false if decoding fails.
+   */
+  protected function body()
+  {
+    // Get the JSON data from the request body
+    $json = file_get_contents('php://input');
+
+    // Decode the JSON data
+    $data = json_decode($json, true);
+
+    // Check if decoding was successful
+    if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+      // JSON decoding failed
+      return false;
+    }
+
+    return $data;
+  }
 }
