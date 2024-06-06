@@ -16,7 +16,7 @@ const stylesHandler = isProduction
 const config = {
   entry: "./src/Resources/ts/index.tsx",
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "public/dist"),
   },
   plugins: [
     new HtmlWebpackPlugin({
