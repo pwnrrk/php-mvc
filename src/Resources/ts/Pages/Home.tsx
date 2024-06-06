@@ -42,7 +42,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
       <ul>
         {journals.map((journal, index) => (
           <li key={index}>
-            <a href={`view/${journal.id}`}>
+            <a href={`/view/${journal.id}`}>
               {journal.name} (
               {journal.publishedDate &&
                 new Date(journal.publishedDate).toLocaleDateString([], {

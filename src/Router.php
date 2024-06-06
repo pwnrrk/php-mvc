@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Configs\ServerConfig;
-
 /**
  * Class Router
  *
@@ -103,8 +101,7 @@ class Router
    */
   public function dispatch()
   {
-    $uri = str_replace(ServerConfig::BASE_URL, "", strtok($_SERVER["REQUEST_URI"], "?"));
-    if ($uri == "") $uri = "/";
+    $uri = strtok($_SERVER["REQUEST_URI"], "?");
     $method = $_SERVER["REQUEST_METHOD"];
 
     foreach ($this->routes[$method] as $route => $value) {
