@@ -61,6 +61,10 @@ class Controller
   {
     header('Content-Type: application/json');
     $json = json_encode($data);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+      // JSON encoding failed
+      throw new \Exception(json_last_error_msg());
+    }
     echo $json;
   }
 
