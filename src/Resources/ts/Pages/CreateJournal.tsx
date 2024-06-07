@@ -26,7 +26,7 @@ export default function CreateJournal() {
   }
 
   return (
-    <article className="prose m-4 mx-auto">
+    <article className="prose p-4 mx-auto">
       <h1>Add Journals</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input label="Name" required {...register("name")} />

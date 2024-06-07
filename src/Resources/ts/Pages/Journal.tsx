@@ -43,7 +43,7 @@ export default function Journal({ journal }: { journal: Journal }) {
   }
 
   return (
-    <article className="prose m-4 mx-auto">
+    <article className="prose p-4 mx-auto">
       <h1 className="text-3xl mb-4">{journal.name}</h1>
       <div className="flex gap-4">
         <div className="flex flex-1 gap-4">

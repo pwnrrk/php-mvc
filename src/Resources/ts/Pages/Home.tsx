@@ -1,7 +1,7 @@
 import React from "react";
+import { BASE_URL } from "../constant";
 import Button from "../components/Button";
 import { PlusIcon } from "@heroicons/react/16/solid";
-import { BASE_URL } from "../constant";
 
 export interface Journal {
   id: string;
@@ -19,14 +19,13 @@ export default function Home({ journals }: { journals: Journal[] }) {
   });
 
   return (
-    <article className="m-4 mx-auto prose">
-      <h1 className="text-3xl mb-4">Journals</h1>
+    <article className="p-4 mx-auto prose">
       <Button
         className={"text-xs ml-2"}
         onClick={() => (window.location.href = `${BASE_URL}/create`)}
       >
         <PlusIcon className="size-4" />
-        Add New
+        New
       </Button>
       <ul>
         {journals.map((journal, index) => (
