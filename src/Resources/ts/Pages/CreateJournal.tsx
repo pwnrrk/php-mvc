@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { Journal } from "./Home";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { BASE_URL } from "../constant";
+import Textarea from "../components/Textarea";
 
 export default function CreateJournal() {
   const { register, handleSubmit } = useForm<Journal>();
 
   async function onSubmit(data: Journal) {
-    const res = await fetch("/api/journals", {
+    const res = await fetch(`${BASE_URL}/api/journals`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,21 +19,20 @@ export default function CreateJournal() {
     });
 
     if (res.ok) {
-      window.location.href = "/";
+      window.location.href = BASE_URL || "/";
     } else {
       window.alert("Save failed.");
     }
   }
 
   return (
-    <div className="m-4">
-      <article className="prose">
-        <h1>Add Journals</h1>
-      </article>
+    <article className="prose m-4 mx-auto">
+      <h1>Add Journals</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Input label="Name" required {...register("name")} />
+        <Textarea label="Content" required {...register("content")} />
         <Button type="submit">Submit</Button>
       </form>
-    </div>
+    </article>
   );
 }

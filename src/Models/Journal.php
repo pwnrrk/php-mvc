@@ -8,13 +8,17 @@ class Journal
 {
   public $id;
   public $name;
+  public $content;
   public $publishedDate;
+  public $read;
 
-  public function __construct($name, $publishedDate)
+  public function __construct($name, $content, $publishedDate = null, $read = 0)
   {
     $this->id = uniqid();
     $this->name = $name;
-    $this->publishedDate = $publishedDate;
+    $this->publishedDate = $publishedDate ?? date("Y-m-d");
+    $this->content = $content;
+    $this->read = $read;
   }
 
   /**
@@ -26,7 +30,7 @@ class Journal
     $data = json_decode($json, true);
     $journals = [];
     foreach ($data as $row) {
-      $journal = new Journal($row['name'], $row['publishedDate']);
+      $journal = new Journal($row['name'], $row['content'], $row['publishedDate'], $row['read']);
       $journal->id = $row['id'];
       array_push($journals, $journal);
     }

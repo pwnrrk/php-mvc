@@ -4,5 +4,5 @@ namespace App\Configs;
 
 class ServerConfig
 {
-  const BASE_URL = "/journal";
+  const BASE_URL = "";
 }

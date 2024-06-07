@@ -1,11 +1,14 @@
 import React from "react";
 import Button from "../components/Button";
 import { PlusIcon, TrashIcon } from "@heroicons/react/16/solid";
+import { BASE_URL } from "../constant";
 
 export interface Journal {
   id: string;
   name: string;
   publishedDate: string;
+  content: string;
+  read: number;
 }
 
 export default function Home({ journals }: { journals: Journal[] }) {
@@ -17,7 +20,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
 
   async function deleteJournal(id: string) {
     if (window.confirm("Delete ?")) {
-      const res = await fetch(`/api/journals/${id}`, {
+      const res = await fetch(`${BASE_URL}/api/journals/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -29,12 +32,11 @@ export default function Home({ journals }: { journals: Journal[] }) {
   }
 
   return (
-    <article className="m-4 prose">
-      <h1 className="text-3xl mb-4">PHP MVC + React</h1>
-      <b>Journals</b>
+    <article className="m-4 mx-auto prose">
+      <h1 className="text-3xl mb-4">Journals</h1>
       <Button
         className={"text-xs ml-2"}
-        onClick={() => (window.location.href = "create")}
+        onClick={() => (window.location.href = `${BASE_URL}/create`)}
       >
         <PlusIcon className="size-4" />
         Add New
@@ -42,7 +44,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
       <ul>
         {journals.map((journal, index) => (
           <li key={index}>
-            <a href={`/view/${journal.id}`}>
+            <a href={`${BASE_URL}/view/${journal.id}`}>
               {journal.name} (
               {journal.publishedDate &&
                 new Date(journal.publishedDate).toLocaleDateString([], {
