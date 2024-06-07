@@ -1,11 +1,24 @@
 import React, { useEffect } from "react";
 import { Journal } from "./Home";
 import { CalendarIcon, EyeIcon } from "@heroicons/react/16/solid";
+import { BASE_URL } from "../constant";
 
 export default function Journal({ journal }: { journal: Journal }) {
   useEffect(() => {
     document.title = journal.name;
   }, []);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/api/journals/${journal.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        read: journal.read + 1,
+      }),
+    });
+  }, [journal.id]);
 
   return (
     <article className="prose m-4 mx-auto">

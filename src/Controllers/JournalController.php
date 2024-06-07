@@ -10,7 +10,6 @@ class JournalController extends Controller
   public function index()
   {
     $journals = Journal::getAll();
-
     $this->json($journals);
   }
 
@@ -34,5 +33,19 @@ class JournalController extends Controller
     $journal = Journal::getById($id);
     $journal->destroy();
     $this->status(204)->send();
+  }
+
+  public function update($params)
+  {
+    $id = $params['id'];
+    $body = $this->body();
+    $journal = Journal::getById($id);
+    foreach ($body as $key => $value) {
+      if ($key != "id") {
+        $journal->$key = $value;
+      }
+    }
+    $journal->save();
+    $this->json($journal);
   }
 }
