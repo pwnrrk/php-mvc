@@ -12,11 +12,13 @@ export default function Layout({ children }: PropsWithChildren) {
     <>
       <nav className="p-1 px-4 xl:px-12 shadow border-b min-h-12 flex items-center">
         <div className="flex-1">
-          <a href="/" className="text-xl font-medium">Journals</a>
+          <a href="/" className="text-xl font-medium">
+            Journals
+          </a>
         </div>
       </nav>
       <main className="min-h-[calc(100vh-180px)]">{children}</main>
-      <footer className="p-4 bg-black text-white flex gap-48 flex-wrap justify-center">
+      <footer className="p-4 bg-black text-white flex gap-4 lg:gap-48 flex-col text-center lg:text-left lg:flex-row flex-wrap justify-center">
         <div>
           <div className="text-2xl font-semibold">Journals</div>
           <p>PHP MVC and React (Typescript) example</p>
@@ -45,34 +47,22 @@ export default function Layout({ children }: PropsWithChildren) {
               </Link>
             </li>
             <li>
-              <Link
-                className="text-inherit"
-                href="https://tailwindcss.com/"
-              >
+              <Link className="text-inherit" href="https://tailwindcss.com/">
                 Tailwind CSS
               </Link>
             </li>
             <li>
-              <Link
-                className="text-inherit"
-                href="https://headlessui.com/"
-              >
+              <Link className="text-inherit" href="https://headlessui.com/">
                 Headless UI
               </Link>
             </li>
             <li>
-              <Link
-                className="text-inherit"
-                href="https://heroicons.com/"
-              >
+              <Link className="text-inherit" href="https://heroicons.com/">
                 Heroicons
               </Link>
             </li>
             <li>
-              <Link
-                className="text-inherit"
-                href="https://fontawesome.com/"
-              >
+              <Link className="text-inherit" href="https://fontawesome.com/">
                 Fontawesome
               </Link>
             </li>

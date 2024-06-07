@@ -27,7 +27,7 @@ class Router
    */
   private function addRoute($route, $controller, $action, $method)
   {
-    $this->routes[$method][$route] = ['controller' => $controller, 'action' => $action];
+    $this->routes[$method][ServerConfig::BASE_URL . $route] = ['controller' => $controller, 'action' => $action];
   }
 
   /**
@@ -105,9 +105,7 @@ class Router
   {
     if (ServerConfig::BASE_URL != "" && strpos($_SERVER['REQUEST_URI'], ServerConfig::BASE_URL) === false) throw new \Exception("Request uri not start with base uri config");
 
-    $uri = strtok(str_replace(ServerConfig::BASE_URL, "", $_SERVER["REQUEST_URI"]), "?");
-    if ($uri == "") $uri = "/";
-
+    $uri = strtok($_SERVER["REQUEST_URI"], "?");
     $method = $_SERVER["REQUEST_METHOD"];
 
     foreach ($this->routes[$method] as $route => $value) {
