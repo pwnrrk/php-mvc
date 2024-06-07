@@ -71,7 +71,7 @@ const Textarea = forwardRef<HTMLInputElement, TextareaProps>(function (
             {...props}
             className={clsx(
               "mt-2 block w-full rounded border-black/10 shadow-sm border py-1.5 px-3 text-sm/6",
-              "focus:outline-none data-[focus]:border-blue-500 data-[focus]:ring transition",
+              "focus:outline-none data-[focus]:border-blue-500 data-[focus]:ring",
               "disabled:pointer-events-none",
               error && "border-red-600",
               startIcon && "pl-8",

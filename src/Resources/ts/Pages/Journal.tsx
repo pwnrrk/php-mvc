@@ -1,9 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Journal } from "./Home";
-import { CalendarIcon, EyeIcon } from "@heroicons/react/16/solid";
+import {
+  CalendarIcon,
+  EllipsisHorizontalIcon,
+  EyeIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/16/solid";
 import { BASE_URL } from "../constant";
+import Dropdown from "../components/Dropdown";
+import Dialog from "../components/Dialog";
+import Button from "../components/Button";
 
 export default function Journal({ journal }: { journal: Journal }) {
+  const [isDelete, setDelete] = useState(false);
+
   useEffect(() => {
     document.title = journal.name;
   }, []);
@@ -20,24 +31,81 @@ export default function Journal({ journal }: { journal: Journal }) {
     });
   }, [journal.id]);
 
+  async function deleteJournal() {
+    const res = await fetch(`${BASE_URL}/api/journals/${journal.id}`, {
+      method: "DELETE",
+    });
+    if (res.ok) {
+      window.location.href = BASE_URL || "/";
+    } else {
+      window.alert("Delete failed.");
+    }
+  }
+
   return (
     <article className="prose m-4 mx-auto">
       <h1 className="text-3xl mb-4">{journal.name}</h1>
       <div className="flex gap-4">
-        <div className="flex gap-1 items-center">
-          <CalendarIcon className="size-4" />
-          {journal.publishedDate &&
-            new Date(journal.publishedDate).toLocaleDateString([], {
-              dateStyle: "medium",
-            })}
+        <div className="flex flex-1 gap-4">
+          <div className="flex gap-1 items-center">
+            <CalendarIcon className="size-4" />
+            {journal.publishedDate &&
+              new Date(journal.publishedDate).toLocaleDateString([], {
+                dateStyle: "medium",
+              })}
+          </div>
+          <div className="flex gap-1 items-center">
+            <EyeIcon className="size-4" />
+            {journal.read}
+          </div>
         </div>
-        <div className="flex gap-1 items-center">
-          <EyeIcon className="size-4" />
-          {journal.read}
-        </div>
+        <Dropdown
+          buttonProps={{
+            startIcon: <EllipsisHorizontalIcon className="size-4" />,
+            className:
+              "bg-transparent text-inherit border-none shadow-none hover:bg-black/5",
+          }}
+          items={[
+            {
+              label: "Edit",
+              disabled: true,
+              icon: <PencilSquareIcon className="size-4" />,
+            },
+            {
+              label: "Delete",
+              icon: <TrashIcon className="size-4" />,
+              buttonProps: {
+                onClick: () => setDelete(true),
+              },
+            },
+          ]}
+        />
       </div>
       <hr />
       <p className="whitespace-pre-wrap">{journal.content}</p>
+      <Dialog
+        open={isDelete}
+        title={`Delete this journal?`}
+        content={
+          (
+            <p>
+              Are your sure to permanently delete <b>{journal.name}</b>.
+            </p>
+          ) as any
+        }
+        onClose={() => setDelete(false)}
+        actions={[
+          <Button
+            onClick={deleteJournal}
+            className={"bg-red-600 hover:bg-red-700"}
+          >
+            Confirm
+          </Button>,
+          <Button variant="secondary" onClick={() => setDelete(false)}>
+            Cancel
+          </Button>,
+        ]}
+      />
     </article>
   );
 }

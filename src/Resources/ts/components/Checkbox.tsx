@@ -31,7 +31,7 @@ const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function (
           {...props}
           ref={ref}
           className={clsx(
-            "group size-6 rounded-md bg-black/10 p-1 ring-1 focus:ring focus:ring-blue-500/60 outline-none ring-black/20 data-[checked]:bg-blue-500 transition",
+            "group size-6 rounded-md bg-black/10 p-1 ring-1 focus:ring focus:ring-blue-500/60 outline-none ring-black/20 data-[checked]:bg-blue-500",
             props.className
           )}
         >
