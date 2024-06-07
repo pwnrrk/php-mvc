@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from "react";
 import Link from "../Link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faDiscord,
   faGithub,
   faInstagram,
   faLinkedin,
@@ -13,7 +12,7 @@ export default function Layout({ children }: PropsWithChildren) {
     <>
       <nav className="p-1 px-4 xl:px-12 shadow border-b min-h-12 flex items-center">
         <div className="flex-1">
-          <span className="text-xl font-medium">Journals</span>
+          <a href="/" className="text-xl font-medium">Journals</a>
         </div>
       </nav>
       <main className="min-h-[calc(100vh-180px)]">{children}</main>
@@ -45,6 +44,38 @@ export default function Layout({ children }: PropsWithChildren) {
                 Typescript
               </Link>
             </li>
+            <li>
+              <Link
+                className="text-inherit"
+                href="https://tailwindcss.com/"
+              >
+                Tailwind CSS
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-inherit"
+                href="https://headlessui.com/"
+              >
+                Headless UI
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-inherit"
+                href="https://heroicons.com/"
+              >
+                Heroicons
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-inherit"
+                href="https://fontawesome.com/"
+              >
+                Fontawesome
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
@@ -69,17 +100,14 @@ export default function Layout({ children }: PropsWithChildren) {
             <b>Links</b>
           </div>
           <div className="space-x-4">
-            <a href="">
+            <a href="https://github.com/pwnrrk/php-mvc">
               <FontAwesomeIcon icon={faGithub} className="size-8" />
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/r.phuwanat/">
               <FontAwesomeIcon icon={faInstagram} className="size-8" />
             </a>
-            <a href="">
+            <a href="https://th.linkedin.com/in/phuwanat-raroengklin-524a03224">
               <FontAwesomeIcon icon={faLinkedin} className="size-8" />
-            </a>
-            <a href="">
-              <FontAwesomeIcon icon={faDiscord} className="size-8" />
             </a>
           </div>
         </div>

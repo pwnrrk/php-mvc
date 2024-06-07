@@ -2,6 +2,12 @@
 
 This project is combined PHP and React.js. Using PHP as a backend with MVC pattern and pre-built React pages.
 
+## Requirement
+
+1. [PHP](https://php.net/)
+2. [Composer](https://getcomposer.org/)
+3. [Node.js](https://nodejs.org/en)
+
 ## Getting start
 
 After clone this project run following commands.
