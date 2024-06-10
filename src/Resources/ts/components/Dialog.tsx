@@ -28,7 +28,7 @@ const Dialog = forwardRef<HTMLElement, ExtendedDialogProps>(function (
         className={clsx("relative z-10 focus:outline-none")}
         ref={ref}
       >
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="fixed inset-0 z-10 bg-black/30 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4">
             <TransitionChild
               enter="ease-out duration-300"

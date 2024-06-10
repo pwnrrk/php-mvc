@@ -61,9 +61,9 @@ export default function Journal({ journal }: { journal: Journal }) {
         </div>
         <Dropdown
           buttonProps={{
-            startIcon: <EllipsisHorizontalIcon className="size-4" />,
+            startIcon: <EllipsisHorizontalIcon className="size-4 fill-black" />,
             className:
-              "bg-transparent text-inherit border-none shadow-none hover:bg-black/5",
+              "bg-transparent text-inherit border-none shadow-none data-[hover]:bg-black/5",
           }}
           items={[
             {
