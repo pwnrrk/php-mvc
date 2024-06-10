@@ -1,11 +1,11 @@
-import React, { PropsWithChildren } from "react";
-import Link from "../Link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGithub,
   faInstagram,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PropsWithChildren } from "react";
+import Link from "../Link";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

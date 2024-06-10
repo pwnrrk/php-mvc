@@ -1,6 +1,4 @@
-import React from "react";
 import {
-  Button,
   Dialog as BaseDialog,
   DialogPanel,
   DialogTitle,
@@ -9,15 +7,16 @@ import {
   DialogProps,
 } from "@headlessui/react";
 import clsx from "clsx";
+import { ReactNode, forwardRef } from "react";
 
 export type ExtendedDialogProps = {
   open: boolean;
-  title: React.ReactNode;
-  content?: React.ReactNode;
-  actions?: React.ReactNode[];
+  title: ReactNode;
+  content?: ReactNode;
+  actions?: ReactNode[];
 } & DialogProps;
 
-const Dialog = React.forwardRef<HTMLElement, ExtendedDialogProps>(function (
+const Dialog = forwardRef<HTMLElement, ExtendedDialogProps>(function (
   { open, title, content, actions, ...props },
   ref
 ) {

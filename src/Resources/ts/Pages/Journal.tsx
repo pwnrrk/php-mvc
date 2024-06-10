@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { Journal } from "./Home";
 import {
   CalendarIcon,
   EllipsisHorizontalIcon,
@@ -7,10 +5,12 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/16/solid";
-import { BASE_URL } from "../constant";
-import Dropdown from "../components/Dropdown";
-import Dialog from "../components/Dialog";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
+import Dialog from "../components/Dialog";
+import Dropdown from "../components/Dropdown";
+import { BASE_URL } from "../constant";
+import { Journal } from "./Home";
 
 export default function Journal({ journal }: { journal: Journal }) {
   const [isDelete, setDelete] = useState(false);

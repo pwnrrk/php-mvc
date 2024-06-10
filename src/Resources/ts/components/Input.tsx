@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import {
   Description,
   Field,
@@ -9,7 +9,6 @@ import {
   DescriptionProps,
 } from "@headlessui/react";
 import clsx from "clsx";
-import { forwardRef } from "react";
 
 export interface InputProps extends BaseInputProps {
   label?: string;

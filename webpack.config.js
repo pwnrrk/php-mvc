@@ -17,6 +17,10 @@ const config = {
   entry: "./src/Resources/ts/index.tsx",
   output: {
     path: path.resolve(__dirname, "public/dist"),
+    chunkFilename: "[name].js",
+  },
+  optimization: {
+    minimize: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

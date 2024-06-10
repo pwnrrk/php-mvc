@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { Journal } from "./Home";
 import Input from "../components/Input";

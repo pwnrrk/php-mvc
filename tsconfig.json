@@ -5,11 +5,11 @@
     "module": "esnext",
     "target": "es5",
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
   },
   "include": ["src/Resources/ts"]
 }
