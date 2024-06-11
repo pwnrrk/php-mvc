@@ -98,10 +98,11 @@ export default function Journal({ journal }: { journal: IJournal }) {
           <Button
             onClick={deleteJournal}
             className={"bg-red-600 hover:bg-red-700"}
+            key={0}
           >
             Confirm
           </Button>,
-          <Button variant="secondary" onClick={() => setDelete(false)}>
+          <Button variant="secondary" onClick={() => setDelete(false)} key={1}>
             Cancel
           </Button>,
         ]}

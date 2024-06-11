@@ -8,17 +8,8 @@ class React
   {
     $json = json_encode($data);
     include "Views/main.php";
-    echo "<script defer id='react-renderer'>";
-    echo "let timer = setInterval(() => {
-      if (!window.render) return;
-      try {
-        window.render('$component', $json)
-      } catch (err) {
-        console.error(err);
-      } finally {
-        clearInterval(timer);
-      }
-    },100)";
+    echo "<script id='react-value'>";
+    echo "window._react_page = '$component';window._react_props = $json;";
     echo "</script>";
   }
 }

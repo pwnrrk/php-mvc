@@ -37,11 +37,17 @@ const Dropdown = forwardRef<HTMLElement, DropdownProps>(function (
   { buttonProps, menuItemsProps, items, ...props },
   ref
 ) {
-  const variant = buttonProps?.variant || "primary";
+  const {
+    startIcon,
+    endIcon,
+    label,
+    variant = "primary",
+    ...menuButtonProps
+  } = buttonProps || {};
   return (
     <Menu {...props} ref={ref}>
       <MenuButton
-        {...buttonProps}
+        {...menuButtonProps}
         className={clsx(
           "inline-flex items-center gap-2 rounded-md p-1 text-sm/6 border border-black/20 outline-none",
           "disabled:pointer-events-none disabled:select-none",
@@ -52,12 +58,12 @@ const Dropdown = forwardRef<HTMLElement, DropdownProps>(function (
             "bg-white hover:bg-black/10 text-black disabled:opacity-60",
           variant === "soft" &&
             "bg-blue-500/10 border-none shadow-none text-blue-600 hover:bg-blue-500/20 disabled:opacity-60",
-          buttonProps?.className
+          menuButtonProps?.className
         )}
       >
-        {buttonProps?.startIcon}
-        {buttonProps?.label}
-        {buttonProps?.endIcon}
+        {startIcon}
+        {label}
+        {endIcon}
       </MenuButton>
       <Transition
         enter="transition ease-out duration-75"

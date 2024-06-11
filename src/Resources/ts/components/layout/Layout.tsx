@@ -14,7 +14,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <nav className="p-1 px-4 xl:px-12 shadow border-b min-h-12 flex items-center">
         <div className="flex-1">
           <a href="/" className="text-xl font-medium flex items-center gap-2">
-            <img src={logo} alt="PHP-React" className="size-8" loading="lazy" />
+            <img src={logo} alt="PHP-React" className="size-8" />
             Journals
           </a>
         </div>
