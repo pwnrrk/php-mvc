@@ -2,24 +2,16 @@
 
 namespace App\Models;
 
+use App\Model;
 use App\Storage;
 
-class Journal
+class Journal extends Model
 {
   public $id;
   public $name;
   public $content;
   public $publishedDate;
   public $read;
-
-  public function __construct($name, $content, $publishedDate = null, $read = 0)
-  {
-    $this->id = uniqid();
-    $this->name = $name;
-    $this->publishedDate = $publishedDate ?? date("Y-m-d");
-    $this->content = $content;
-    $this->read = $read;
-  }
 
   /**
    * @return Journal[]
@@ -30,8 +22,7 @@ class Journal
     $data = json_decode($json, true);
     $journals = [];
     foreach ($data as $row) {
-      $journal = new Journal($row['name'], $row['content'], $row['publishedDate'], $row['read']);
-      $journal->id = $row['id'];
+      $journal = new Journal($row);
       array_push($journals, $journal);
     }
     return $journals;

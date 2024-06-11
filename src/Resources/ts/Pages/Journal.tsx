@@ -10,9 +10,9 @@ import Button from "../components/Button";
 import Dialog from "../components/Dialog";
 import Dropdown from "../components/Dropdown";
 import { BASE_URL } from "../constant";
-import { Journal } from "./Home";
+import { Journal as IJournal } from "./Home";
 
-export default function Journal({ journal }: { journal: Journal }) {
+export default function Journal({ journal }: { journal: IJournal }) {
   const [isDelete, setDelete] = useState(false);
 
   useEffect(() => {
