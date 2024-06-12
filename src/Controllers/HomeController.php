@@ -10,19 +10,17 @@ class HomeController extends Controller
 {
   public function index()
   {
-    $journals = Journal::getAll();
-
-    return React::render("Home", ["journals" => $journals]);
+    return React::render("Home");
   }
 
   public function show($params)
   {
     $journal = Journal::getById($params['id']);
-    return React::render("Journal", ["journal" => $journal]);
+    return React::render("Example/Journal", ["journal" => $journal]);
   }
 
   public function create()
   {
-    return React::render("CreateJournal");
+    return React::render("Example/CreateJournal");
   }
 }

@@ -2,6 +2,7 @@
 
 use App\Controllers\HomeController;
 use App\Controllers\JournalController;
+use App\Middlewares\AuthMiddleware;
 use App\Router;
 
 $router = new Router();
@@ -18,6 +19,6 @@ $router->group("/api", function (Router $api) {
     $journal->put("/{id}", JournalController::class, "update");
     $journal->delete("/{id}", JournalController::class, "destroy");
   });
-});
+}, [AuthMiddleware::class]);
 
 $router->dispatch();

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Journal } from "./Home";
+import { Journal } from "./Main";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { BASE_URL } from "../constant";

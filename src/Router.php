@@ -20,18 +20,28 @@ class Router
   protected $groupPrefix = '';
 
   /**
+   * @var array Stores the current route group middlewares.
+   */
+  protected $groupMiddlewares = [];
+
+  /**
    * Adds a route to the router for a specific HTTP method.
    *
    * @param string $route The URL route pattern.
    * @param string $controller The controller class name.
    * @param string $action The method name within the controller class.
    * @param string $method The HTTP method for the route.
+   * @param array $middlewares The middlewares to be applied to the route.
    * @return void
    */
-  private function addRoute($route, $controller, $action, $method)
+  private function addRoute($route, $controller, $action, $method, $middlewares = [])
   {
     $route = $this->groupPrefix . $route;
-    $this->routes[$method][BASE_URL . $route] = ['controller' => $controller, 'action' => $action];
+    $this->routes[$method][BASE_URL . $route] = [
+      'controller' => $controller, 
+      'action' => $action, 
+      'middlewares' => array_merge($this->groupMiddlewares, $middlewares)
+    ];
   }
 
   /**
@@ -40,11 +50,12 @@ class Router
    * @param string $route The URL route pattern.
    * @param string $controller The controller class name.
    * @param string $action The method name within the controller class.
+   * @param array $middlewares The middlewares to be applied to the route.
    * @return void
    */
-  public function get($route, $controller, $action)
+  public function get($route, $controller, $action, $middlewares = [])
   {
-    $this->addRoute($route, $controller, $action, "GET");
+    $this->addRoute($route, $controller, $action, "GET", $middlewares);
   }
 
   /**
@@ -53,11 +64,12 @@ class Router
    * @param string $route The URL route pattern.
    * @param string $controller The controller class name.
    * @param string $action The method name within the controller class.
+   * @param array $middlewares The middlewares to be applied to the route.
    * @return void
    */
-  public function post($route, $controller, $action)
+  public function post($route, $controller, $action, $middlewares = [])
   {
-    $this->addRoute($route, $controller, $action, "POST");
+    $this->addRoute($route, $controller, $action, "POST", $middlewares);
   }
 
   /**
@@ -66,11 +78,12 @@ class Router
    * @param string $route The URL route pattern.
    * @param string $controller The controller class name.
    * @param string $action The method name within the controller class.
+   * @param array $middlewares The middlewares to be applied to the route.
    * @return void
    */
-  public function put($route, $controller, $action)
+  public function put($route, $controller, $action, $middlewares = [])
   {
-    $this->addRoute($route, $controller, $action, "PUT");
+    $this->addRoute($route, $controller, $action, "PUT", $middlewares);
   }
 
   /**
@@ -79,11 +92,12 @@ class Router
    * @param string $route The URL route pattern.
    * @param string $controller The controller class name.
    * @param string $action The method name within the controller class.
+   * @param array $middlewares The middlewares to be applied to the route.
    * @return void
    */
-  public function delete($route, $controller, $action)
+  public function delete($route, $controller, $action, $middlewares = [])
   {
-    $this->addRoute($route, $controller, $action, "DELETE");
+    $this->addRoute($route, $controller, $action, "DELETE", $middlewares);
   }
 
   /**
@@ -92,11 +106,12 @@ class Router
    * @param string $route The URL route pattern.
    * @param string $controller The controller class name.
    * @param string $action The method name within the controller class.
+   * @param array $middlewares The middlewares to be applied to the route.
    * @return void
    */
-  public function patch($route, $controller, $action)
+  public function patch($route, $controller, $action, $middlewares = [])
   {
-    $this->addRoute($route, $controller, $action, "PATCH");
+    $this->addRoute($route, $controller, $action, "PATCH", $middlewares);
   }
 
   /**
@@ -104,21 +119,25 @@ class Router
    *
    * @param string $prefix The common route prefix.
    * @param callable $callback A callback function to define routes within the group.
+   * @param array $middlewares The middlewares to be applied to the group.
    * @return void
    */
-  public function group($prefix, $callback)
+  public function group($prefix, $callback, $middlewares = [])
   {
-    // Save the current prefix
+    // Save the current prefix and middlewares
     $previousGroupPrefix = $this->groupPrefix;
+    $previousGroupMiddlewares = $this->groupMiddlewares;
 
-    // Append the new prefix to the current prefix
+    // Append the new prefix and merge middlewares
     $this->groupPrefix .= $prefix;
+    $this->groupMiddlewares = array_merge($this->groupMiddlewares, $middlewares);
 
     // Execute the callback to define routes within the group
     $callback($this);
 
-    // Restore the previous prefix
+    // Restore the previous prefix and middlewares
     $this->groupPrefix = $previousGroupPrefix;
+    $this->groupMiddlewares = $previousGroupMiddlewares;
   }
 
   /**
@@ -136,6 +155,14 @@ class Router
 
     foreach ($this->routes[$method] as $route => $value) {
       if ($this->isMatchingRoute($uri, $route)) {
+        // Execute middlewares
+        foreach ($value['middlewares'] as $middleware) {
+          $middlewareInstance = new $middleware();
+          if (!$middlewareInstance->handle()) {
+            return;
+          }
+        }
+
         $controller = $value['controller'];
         $action = $value['action'];
         $params = $this->extractParams($uri, $route);
@@ -144,7 +171,7 @@ class Router
         return;
       }
     }
-    throw new \Exception("No route found for URI: $uri", 404);
+    throw new \Exception("No route found for URI: $uri");
   }
 
   /**
