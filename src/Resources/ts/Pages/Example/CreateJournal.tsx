@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Journal } from "./Main";
-import Input from "../components/Input";
-import Button from "../components/Button";
-import { BASE_URL } from "../constant";
-import Textarea from "../components/Textarea";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import { BASE_URL } from "../../constant";
+import Textarea from "../../components/Textarea";
 
 export default function CreateJournal() {
   const { register, handleSubmit } = useForm<Journal>();

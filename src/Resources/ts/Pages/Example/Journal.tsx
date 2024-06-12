@@ -6,10 +6,10 @@ import {
   TrashIcon,
 } from "@heroicons/react/16/solid";
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
-import Dialog from "../components/Dialog";
-import Dropdown from "../components/Dropdown";
-import { BASE_URL } from "../constant";
+import Button from "../../components/Button";
+import Dialog from "../../components/Dialog";
+import Dropdown from "../../components/Dropdown";
+import { BASE_URL } from "../../constant";
 import { Journal as IJournal } from "./Main";
 
 export default function Journal({ journal }: { journal: IJournal }) {

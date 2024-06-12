@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/16/solid";
-import Button from "../components/Button";
-import { BASE_URL } from "../constant";
+import Button from "../../components/Button";
+import { BASE_URL } from "../../constant";
 
 export interface Journal {
   id: string;
