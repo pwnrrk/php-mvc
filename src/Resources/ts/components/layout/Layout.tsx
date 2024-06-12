@@ -14,7 +14,8 @@ import {
   PaperAirplaneIcon,
   UserGroupIcon,
 } from "@heroicons/react/16/solid";
-import Button from "../Button";
+import SidebarMenuLink from "./SidebarMenuLink";
+import { BASE_URL } from "../../constant";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
@@ -32,40 +33,21 @@ export default function Layout({ children }: PropsWithChildren) {
         </div>
         <div className="my-4"></div>
         <div className="py-4 text-black/60 flex flex-col items-stretch w-full">
-          <Button
-            data-active
-            className={clsx(
-              "flex flex-col items-center py-2 hover:bg-black/5 bg-transparent text-black/60 ",
-              "shadow-none border-none data-[active=true]:bg-black/10"
-            )}
-          >
-            <div>
-              <UserGroupIcon className="size-6" />
-            </div>
-            Members
-          </Button>
-          <Button
-            className={clsx(
-              "flex flex-col items-center py-2 hover:bg-black/5 bg-transparent text-black/60 ",
-              "shadow-none border-none"
-            )}
-          >
-            <div>
-              <ClockIcon className="size-6" />
-            </div>
-            Reminder
-          </Button>
-          <Button
-            className={clsx(
-              "flex flex-col items-center py-2 hover:bg-black/5 bg-transparent text-black/60 ",
-              "shadow-none border-none"
-            )}
-          >
-            <div>
-              <PaperAirplaneIcon className="size-6" />
-            </div>
-            Flight
-          </Button>
+          <SidebarMenuLink
+            icon={<UserGroupIcon className="size-6" />}
+            label={"Members"}
+            href={`${BASE_URL}/members`}
+          />
+          <SidebarMenuLink
+            icon={<ClockIcon className="size-6" />}
+            href={`${BASE_URL}/reminder`}
+            label="Reminders"
+          />
+          <SidebarMenuLink
+            icon={<PaperAirplaneIcon className="size-6" />}
+            label={"Flights"}
+            href={`${BASE_URL}/flights`}
+          />
         </div>
       </nav>
       <div className="grow">

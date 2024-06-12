@@ -15,6 +15,11 @@ class Router
   protected $routes = [];
 
   /**
+   * @var string Stores the current route group prefix.
+   */
+  protected $groupPrefix = '';
+
+  /**
    * Adds a route to the router for a specific HTTP method.
    *
    * @param string $route The URL route pattern.
@@ -25,6 +30,7 @@ class Router
    */
   private function addRoute($route, $controller, $action, $method)
   {
+    $route = $this->groupPrefix . $route;
     $this->routes[$method][BASE_URL . $route] = ['controller' => $controller, 'action' => $action];
   }
 
@@ -94,6 +100,28 @@ class Router
   }
 
   /**
+   * Groups routes under a common prefix.
+   *
+   * @param string $prefix The common route prefix.
+   * @param callable $callback A callback function to define routes within the group.
+   * @return void
+   */
+  public function group($prefix, $callback)
+  {
+    // Save the current prefix
+    $previousGroupPrefix = $this->groupPrefix;
+
+    // Append the new prefix to the current prefix
+    $this->groupPrefix .= $prefix;
+
+    // Execute the callback to define routes within the group
+    $callback($this);
+
+    // Restore the previous prefix
+    $this->groupPrefix = $previousGroupPrefix;
+  }
+
+  /**
    * Dispatches the current request to the appropriate controller action based on registered routes.
    *
    * @throws \Exception If no route is found for the requested URI.
@@ -116,7 +144,7 @@ class Router
         return;
       }
     }
-    throw new \Exception("No route found for URI: $uri");
+    throw new \Exception("No route found for URI: $uri", 404);
   }
 
   /**

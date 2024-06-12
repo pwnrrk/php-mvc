@@ -9,9 +9,15 @@ $router = new Router();
 $router->get("/", HomeController::class, 'index');
 $router->get("/create", HomeController::class, 'create');
 $router->get("/view/{id}", HomeController::class, 'show');
-$router->get("/api/journals", JournalController::class, 'index');
-$router->post("/api/journals", JournalController::class, 'create');
-$router->get("/api/journals/{id}", JournalController::class, 'get');
-$router->put("/api/journals/{id}", JournalController::class, 'update');
-$router->delete("/api/journals/{id}", JournalController::class, "destroy");
+
+$router->group("/api", function (Router $api) {
+  $api->group("/journals", function (Router $journal) {
+    $journal->get("/", JournalController::class, "index");
+    $journal->post("/", JournalController::class, "create");
+    $journal->get("/{id}", JournalController::class, "get");
+    $journal->put("/{id}", JournalController::class, "update");
+    $journal->delete("/{id}", JournalController::class, "destroy");
+  });
+});
+
 $router->dispatch();

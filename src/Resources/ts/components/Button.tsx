@@ -19,6 +19,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function (
       ref={ref}
       {...props}
       className={clsx(
+        props.className,
         "inline-flex items-center gap-2 rounded-md p-1 text-sm/6 border border-black/20 outline-none",
         "disabled:pointer-events-none disabled:select-none",
         "font-semibold  shadow focus:ring ",
@@ -28,7 +29,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function (
           "bg-white hover:bg-black/10 text-black disabled:opacity-60",
         variant === "soft" &&
           "bg-blue-500/10 border-none shadow-none text-blue-600 hover:bg-blue-500/20 disabled:opacity-60",
-        props.className
       )}
     ></BaseButton>
   );
