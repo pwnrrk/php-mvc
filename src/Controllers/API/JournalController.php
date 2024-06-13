@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\API;
 
 use App\Controller;
 use App\Models\Journal;

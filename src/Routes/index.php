@@ -1,15 +1,24 @@
 <?php
 
+use App\Controllers\API\JournalController;
+use App\Controllers\DocsController;
 use App\Controllers\HomeController;
-use App\Controllers\JournalController;
+use App\Controllers\ExampleController;
 use App\Middlewares\AuthMiddleware;
 use App\Router;
 
 $router = new Router();
 
 $router->get("/", HomeController::class, 'index');
-$router->get("/create", HomeController::class, 'create');
-$router->get("/view/{id}", HomeController::class, 'show');
+
+$router->group("/docs", function (Router $docs) {
+  $docs->get("/", DocsController::class, "index");
+});
+
+$router->group("/example", function (Router $example) {
+  $example->get("/create", ExampleController::class, 'create');
+  $example->get("/view/{id}", ExampleController::class, 'show');
+});
 
 $router->group("/api", function (Router $api) {
   $api->group("/journals", function (Router $journal) {

@@ -183,6 +183,8 @@ class Router
    */
   protected function isMatchingRoute($uri, $route)
   {
+    $route = rtrim($route, "/");
+    $uri = rtrim($uri, "/");
     // Replace route parameters with regex pattern
     $pattern = preg_replace('~/{([^/]+)}~', '/([^/]+)', $route);
     $pattern = '~^' . $pattern . '$~';
