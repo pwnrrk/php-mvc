@@ -1,7 +1,7 @@
 export default function Model() {
   return (
-    <section id="middleware">
-      <h1>API Reference - Model Class</h1>
+    <section id="model">
+      <h1>Model Class</h1>
       <p>
         This document provides an overview of the <code>Model</code> class
         within the <code>App</code> namespace.

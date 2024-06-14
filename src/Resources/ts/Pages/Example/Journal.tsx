@@ -36,7 +36,7 @@ export default function Journal({ journal }: { journal: IJournal }) {
       method: "DELETE",
     });
     if (res.ok) {
-      window.location.href = BASE_URL || "/";
+      window.location.href = BASE_URL + "/example";
     } else {
       window.alert("Delete failed.");
     }

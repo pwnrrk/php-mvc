@@ -6,7 +6,14 @@ use App\Controller;
 use App\Models\Journal;
 use App\React;
 
-class ExampleController extends Controller {
+class ExampleController extends Controller
+{
+
+  public function index()
+  {
+    $journals = Journal::getAll();
+    React::render("Example/Main", ["journals" => $journals]);
+  }
 
   public function show($params)
   {

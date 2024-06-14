@@ -13,9 +13,11 @@ $router->get("/", HomeController::class, 'index');
 
 $router->group("/docs", function (Router $docs) {
   $docs->get("/", DocsController::class, "index");
+  $docs->get("/{name}", DocsController::class, "show");
 });
 
 $router->group("/example", function (Router $example) {
+  $example->get("/", ExampleController::class, 'index');
   $example->get("/create", ExampleController::class, 'create');
   $example->get("/view/{id}", ExampleController::class, 'show');
 });

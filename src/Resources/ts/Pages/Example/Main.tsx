@@ -21,7 +21,7 @@ export default function Home({ journals }: { journals: Journal[] }) {
     <article className="p-4 mx-auto prose">
       <Button
         className={"text-xs ml-2"}
-        onClick={() => (window.location.href = `${BASE_URL}/create`)}
+        onClick={() => (window.location.href = `${BASE_URL}/example/create`)}
       >
         <PlusIcon className="size-4" />
         New
@@ -29,7 +29,9 @@ export default function Home({ journals }: { journals: Journal[] }) {
       <ul>
         {journals.map((journal, index) => (
           <li key={index}>
-            <a href={`${BASE_URL}/view/${journal.id}`}>{journal.name}</a>
+            <a href={`${BASE_URL}/example/view/${journal.id}`}>
+              {journal.name}
+            </a>
           </li>
         ))}
       </ul>

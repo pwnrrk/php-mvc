@@ -18,7 +18,7 @@ export default function CreateJournal() {
     });
 
     if (res.ok) {
-      window.location.href = BASE_URL || "/";
+      window.location.href = BASE_URL + "/example";
     } else {
       window.alert("Save failed.");
     }

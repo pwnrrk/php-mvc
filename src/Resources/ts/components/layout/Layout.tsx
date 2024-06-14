@@ -56,6 +56,10 @@ export default function Layout({ children }: PropsWithChildren) {
     };
   }, []);
 
+  const matchedLinks = menu.filter((item) =>
+    window.location.pathname.startsWith(`${BASE_URL}${item.href}`)
+  );
+
   return (
     <>
       <nav
@@ -76,6 +80,9 @@ export default function Layout({ children }: PropsWithChildren) {
               <a
                 key={index}
                 href={`${BASE_URL}${value.href}`}
+                data-active={
+                  matchedLinks[matchedLinks.length - 1]?.name === value.name
+                }
                 className={clsx(
                   "hover:bg-black/5 bg-transparent rounded p-2 font-medium",
                   "data-[active=true]:bg-black/10"

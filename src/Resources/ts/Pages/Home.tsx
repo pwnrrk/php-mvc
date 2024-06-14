@@ -50,8 +50,8 @@ export default function Home() {
           </div>
           <div className="text-xl">
             PHP React is a base structure for create PHP application including
-            router, controller, model, etc. Let you build a API or Full-stack
-            application with React components.
+            basic tasks such as routing, controller, model, etc. Let you build a
+            API or Full-stack application with React components.
           </div>
           <div className="py-6 text-left grid grid-cols-2 gap-4">
             <div>
@@ -155,15 +155,15 @@ export default function Home({ user }: HomeProps){
         </div>
       </section>
       <section className="py-16 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center">
-        <div className="max-w-5xl mx-auto flex gap-4 text-left">
+        <div className="max-w-5xl mx-auto flex items-center gap-4 text-left">
           <div>
             <div className="text-3xl font-medium mb-6">
               Extend the project as your use cases
             </div>
             <div className="text-xl">
               Unlike framework. This is just a simple folder structure setup
-              with minimal package dependencies. You can adapt the code as you
-              want.
+              with minimal package dependencies. You can extends the code as
+              your use cases .
             </div>
           </div>
           <div>
@@ -179,10 +179,10 @@ export default function Home({ user }: HomeProps){
 │   ├── Controllers
 │   ├── Middlewares
 │   ├── Models
-│   ├── Resources
+│   ├── Resources/
 │   │   ├── assets
 │   │   ├── css
-│   │   └── ts
+│   │   └── ts/
 │   │       ├── components
 │   │       └── Pages
 │   └── Views
@@ -194,7 +194,18 @@ export default function Home({ user }: HomeProps){
             ></pre>
           </div>
         </div>
+      </section>
+      <section className="py-16 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center">
         <div className="max-w-5xl mx-auto gap-4 py-16">
+          <div className="text-3xl font-medium mb-6">Why not framework ?</div>
+          <div className="text-xl mb-6">
+            From our experience of migrating internal web application of our
+            company to newer version of PHP. We found that we have to keep many
+            "Legacy Code" and using framework we might need to re-write the
+            whole application. Some feature we don't need. And some feature we
+            want it to be flexible to extends. So we just organize the project
+            structure and do some improvement of routing and rendering.
+          </div>
           <div className="text-3xl font-medium mb-6">Ready for building ?</div>
           <Button className={"text-xl px-4"} onClick={gotoDocs}>
             Get Started
