@@ -95,13 +95,14 @@ export default function Layout({ children }: PropsWithChildren) {
         </div>
       </nav>
       <main className="min-h-[calc(100vh-180px)]">{children}</main>
-      <footer className="p-4 bg-black text-white flex gap-4 lg:gap-48 flex-col text-center lg:text-left lg:flex-row flex-wrap justify-center">
+      <footer className="p-4 relative bg-black text-white flex gap-4 lg:gap-32 flex-col text-center lg:text-left lg:flex-row flex-wrap justify-center">
         <div>
           <div className="text-2xl font-semibold flex items-center gap-2">
             <img src={logo} alt="PHP-React" className="size-10" />
             <span>PHP React</span>
           </div>
           <p>The MVC PHP with React Typescript starter project</p>
+          <small>R.Phuwanat</small>
         </div>
         <div>
           <div className="my-2">

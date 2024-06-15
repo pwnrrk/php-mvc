@@ -107,7 +107,7 @@ export default function Docs({ name }: DocsProps) {
           </ul>
         </div>
       </nav>
-      <div className="prose max-w-6xl py-10 ml-96">
+      <div className="prose max-w-3xl py-10 mx-auto">
         {name && (
           <Suspense fallback={<></>}>
             <Content />
