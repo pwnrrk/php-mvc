@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect } from "react";
 import { BASE_URL } from "../constant";
 
 interface DocsProps {
@@ -21,6 +21,10 @@ export default function Docs({ name }: DocsProps) {
     {
       name: "Project Structure",
       href: "/project-structure",
+    },
+    {
+      name: "Building your app",
+      href: "/build-your-app",
     },
   ];
 
@@ -51,12 +55,24 @@ export default function Docs({ name }: DocsProps) {
     },
   ];
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const interval = setInterval(() => {
+        const element = document.getElementById(hash.replace("#", ""));
+        if (!element) return;
+        element.scrollIntoView();
+        clearInterval(interval);
+      }, 100);
+    }
+  }, []);
+
   return (
     <>
       <nav className="fixed bottom-0 top-0 left-0 bg-white h-screen border-r p-4 pt-16">
         <div className="prose prose-sm prose-a:no-underline prose-ul:list-none prose-ul:p-0">
           <h3>Documentation</h3>
-          <ul className="prose-li:pl-2 pr-2">
+          <ul className="prose-li:pl-2 prose-li:pr-2">
             <li>
               <a href="#get-start" className="font-bold">
                 Get start

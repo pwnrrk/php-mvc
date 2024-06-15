@@ -49,7 +49,7 @@ export default function Installation() {
           </pre>
         </li>
       </ol>
-      <h2>Runing development server</h2>
+      <h2 id="running-development-server">Running development server</h2>
       <ol>
         <li>
           <p>PHP development server</p>
