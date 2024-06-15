@@ -23,7 +23,7 @@ export default function Docs({ name }: DocsProps) {
       href: "/project-structure",
     },
     {
-      name: "Building your app",
+      name: "Building Your App",
       href: "/build-your-app",
     },
   ];
@@ -71,7 +71,6 @@ export default function Docs({ name }: DocsProps) {
     <>
       <nav className="fixed bottom-0 top-0 left-0 bg-white h-screen border-r p-4 pt-16">
         <div className="prose prose-sm prose-a:no-underline prose-ul:list-none prose-ul:p-0">
-          <h3>Documentation</h3>
           <ul className="prose-li:pl-2 prose-li:pr-2">
             <li>
               <a href="#get-start" className="font-bold">

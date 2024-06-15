@@ -6,7 +6,7 @@ export default function BuildYourApp() {
   return (
     <section>
       <h1>Building your app</h1>
-      <h2>Basic concept of the project</h2>
+      <h2>Handling the request</h2>
       This is the example of basic request handling
       <ol>
         <li>
@@ -137,6 +137,19 @@ $router->get("/hello", HelloController::class, "index");
           </ul>
         </li>
       </ol>
+      <p>
+        You can use controller to handle http response such as form posting,
+        JSON Response and more.
+      </p>
+      <h2>Render with React</h2>
+      The previous example is the server-side Rendering with PHP. But when you
+      need your app to be more interactive to the user.The client-side rendering
+      using React could make it more easier to implements.
+      <h2>Route grouping</h2>
+      You can group the route to increase readability of your code.
+      <h2>Add Middleware</h2>
+      We can add the middlewares to handle some process before the controller
+      execute. Such as authentication, form validation, etc.
     </section>
   );
 }
