@@ -145,6 +145,73 @@ $router->get("/hello", HelloController::class, "index");
       The previous example is the server-side Rendering with PHP. But when you
       need your app to be more interactive to the user.The client-side rendering
       using React could make it more easier to implements.
+      <ol>
+        <li>
+          <h3>Use React class</h3>
+          This project provided the React class for select page component to
+          render and embed the data to it before sending to the client
+          <ul>
+            <li>
+              Edit <b>src/Controllers/HelloController.php</b>
+            </li>
+            <li>
+              Update the code to look like this
+              <pre
+                className="hljs theme-nord"
+                dangerouslySetInnerHTML={{
+                  __html: hljs.highlight(
+                    `<?php
+// ... Previous code
+use App\\React;
+
+class HelloController extends Controller
+{
+  public function index()
+  {
+    React::render("Hello");
+  }
+}
+`,
+                    { language: "php" }
+                  ).value,
+                }}
+              ></pre>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3>Create React page component</h3>
+          React class will look for component to render with the path{" "}
+          <b>src/Resources/ts/Pages/Home.tsx</b> and throw exception is no file
+          exists.
+          <ul>
+            <li>
+              Create file <b>Home.tsx</b> in{" "}
+              <b>
+                <i>src/Resources/ts/Pages</i>
+              </b>
+            </li>
+            <li>
+              Put this code in the file
+              <pre
+                className="hljs theme-nord"
+                dangerouslySetInnerHTML={{
+                  __html: hljs.highlight(
+                    `export default function Hello() {
+  return <h1>Hello React Component!</h1>
+}`,
+                    { language: "tsx" }
+                  ).value,
+                }}
+              ></pre>
+            </li>
+            <li>
+              Now when you navigate to the page. You should see "Hello React
+              Component!".
+            </li>
+          </ul>
+        </li>
+      </ol>
       <h2>Route grouping</h2>
       You can group the route to increase readability of your code.
       <h2>Add Middleware</h2>
