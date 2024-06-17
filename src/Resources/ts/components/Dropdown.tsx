@@ -77,7 +77,7 @@ const Dropdown = forwardRef<HTMLElement, DropdownProps>(function (
           {...menuItemsProps}
           anchor={menuItemsProps?.anchor || "bottom end"}
           className={clsx(
-            "w-52 origin-top-right rounded-xl border bg-white shadow-lg p-1 text-sm/6 [--anchor-gap:var(--spacing-1)] focus:outline-none",
+            "z-10 w-52 origin-top-right rounded-xl border bg-white shadow-lg p-1 text-sm/6 [--anchor-gap:var(--spacing-1)] focus:outline-none",
             menuItemsProps?.className
           )}
         >

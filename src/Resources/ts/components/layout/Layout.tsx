@@ -9,15 +9,13 @@ import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import Link from "../Link";
 import clsx from "clsx";
 import {
-  ClockIcon,
+  Bars3Icon,
   DocumentIcon,
   DocumentTextIcon,
   HomeIcon,
-  PaperAirplaneIcon,
-  UserGroupIcon,
 } from "@heroicons/react/16/solid";
-import SidebarMenuLink from "./SidebarMenuLink";
 import { BASE_URL } from "../../constant";
+import Dropdown from "../Dropdown";
 
 interface MenuItemValue {
   name: string;
@@ -68,13 +66,13 @@ export default function Layout({ children }: PropsWithChildren) {
           currentScroll >= 250 && "border-b shadow"
         )}
       >
-        <div>
+        <div className="md:flex-none flex-1">
           <a href="/" className="text-xl font-medium flex items-center gap-2">
             <img src={logo} alt="PHP-React" className="size-8" />
             PHP React
           </a>
         </div>
-        <div className="text-black/60 flex px-4 gap-4">
+        <div className="text-black/60 hidden px-4 gap-4 md:flex">
           {menu.map(function (value, index) {
             return (
               <a
@@ -92,6 +90,23 @@ export default function Layout({ children }: PropsWithChildren) {
               </a>
             );
           })}
+        </div>
+        <div className="md:hidden">
+          <Dropdown
+            buttonProps={{
+              startIcon: <Bars3Icon className="size-4" />,
+              variant: "secondary",
+            }}
+            menuItemsProps={{
+              anchor: "bottom end"
+            }}
+            items={menu.map((item) => ({
+              label: item.name,
+              onClick() {
+                window.location.href = `${BASE_URL}${item.href}`;
+              },
+            }))}
+          />
         </div>
       </nav>
       <main className="min-h-[calc(100vh-180px)]">{children}</main>

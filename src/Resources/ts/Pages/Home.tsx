@@ -42,7 +42,7 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="py-16 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center"
+        className="py-16 px-3 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center"
       >
         <div className="max-w-5xl mx-auto ">
           <div className="text-3xl font-medium mb-6">
@@ -53,15 +53,14 @@ export default function Home() {
             basic tasks such as routing, controller, model, etc. Let you build a
             API or Full-stack application with React components.
           </div>
-          <div className="py-6 text-left grid grid-cols-2 gap-4">
-            <div>
-              Controllers/HomeController.php
-              <pre
-                className="hljs rounded p-4"
-                dangerouslySetInnerHTML={{
-                  __html: hljs.highlight(
-                    `<?php
-                
+          <div className="py-6 text-left grid md:grid-cols-2 gap-4">
+            <pre
+              className="w-full whitespace-pre-wrap hljs rounded p-4"
+              dangerouslySetInnerHTML={{
+                __html: hljs.highlight(
+                  `<?php
+// Controllers/HomeController.php
+
 namespace App\\Controllers;
 
 use App\\Controller;
@@ -74,18 +73,16 @@ class HomeController extends Controller
     $this->render("Home", [$user]);
   }
 }`,
-                    { language: "php" }
-                  ).value,
-                }}
-              ></pre>
-            </div>
-            <div>
-              Views/Home.php
-              <pre
-                className="hljs rounded p-4"
-                dangerouslySetInnerHTML={{
-                  __html: hljs.highlight(
-                    `<html>
+                  { language: "php" }
+                ).value,
+              }}
+            ></pre>
+            <pre
+              className="whitespace-pre-wrap hljs rounded p-4"
+              dangerouslySetInnerHTML={{
+                __html: hljs.highlight(
+                  `<!-- Views/Home.php -->
+<html>
   <head>
     <title>My App</title>
   </head>
@@ -93,24 +90,22 @@ class HomeController extends Controller
     <h1>Hello, <?php echo $user['name']; ?></h1>
   </body>
 </html>`,
-                    { language: "html" }
-                  ).value,
-                }}
-              ></pre>
-            </div>
+                  { language: "html" }
+                ).value,
+              }}
+            ></pre>
           </div>
           <div className="text-xl">
             Or use React for client-side rendering with embed data from PHP
           </div>
-          <div className="py-6 text-left grid grid-cols-2 gap-4">
-            <div>
-              Controllers/HomeController.php
-              <pre
-                className="hljs rounded p-4"
-                dangerouslySetInnerHTML={{
-                  __html: hljs.highlight(
-                    `<?php
-                
+          <div className="py-6 text-left grid md:grid-cols-2 gap-4">
+            <pre
+              className="whitespace-pre-wrap hljs rounded p-4"
+              dangerouslySetInnerHTML={{
+                __html: hljs.highlight(
+                  `<?php
+// Controllers/HomeController.php
+
 namespace App\\Controllers;
 
 use App\\Controller;
@@ -124,18 +119,16 @@ class HomeController extends Controller
     React::render("Home", [$user]);
   }
 }`,
-                    { language: "php" }
-                  ).value,
-                }}
-              ></pre>
-            </div>
-            <div>
-              Resources/ts/Pages/Home.tsx
-              <pre
-                className="hljs rounded p-4"
-                dangerouslySetInnerHTML={{
-                  __html: hljs.highlight(
-                    `interface HomeProps {
+                  { language: "php" }
+                ).value,
+              }}
+            ></pre>
+            <pre
+              className="hljs rounded p-4 whitespace-pre-wrap"
+              dangerouslySetInnerHTML={{
+                __html: hljs.highlight(
+                  `// Resources/ts/Pages/Home.tsx
+interface HomeProps {
   user: {
     name: string
   }
@@ -146,16 +139,15 @@ export default function Home({ user }: HomeProps){
     <h1>Hello, {user.name}</h1>
   )
 }`,
-                    { language: "typescript" }
-                  ).value,
-                }}
-              ></pre>
-            </div>
+                  { language: "typescript" }
+                ).value,
+              }}
+            ></pre>
           </div>
         </div>
       </section>
-      <section className="py-16 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center">
-        <div className="max-w-5xl mx-auto flex items-center gap-4 text-left">
+      <section className="py-16 px-3 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-4 text-left">
           <div>
             <div className="text-3xl font-medium mb-6">
               Extend the project as your use cases
@@ -195,7 +187,7 @@ export default function Home({ user }: HomeProps){
           </div>
         </div>
       </section>
-      <section className="py-16 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center">
+      <section className="py-16 px-3 bg-gradient-to-b from-neutral-100 to-white border shadow-inner text-center">
         <div className="max-w-5xl mx-auto gap-4 py-16">
           <div className="text-3xl font-medium mb-6">Why not framework ?</div>
           <div className="text-xl mb-6">
