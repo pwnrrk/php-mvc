@@ -2,6 +2,7 @@
 
 namespace App\Middlewares;
 
+use App\Authenticate;
 use App\Middleware;
 
 class AuthMiddleware extends Middleware
@@ -10,7 +11,7 @@ class AuthMiddleware extends Middleware
   {
     // Perform authentication check
     // Return true if the request should proceed, false otherwise
-    if (!isset($_SESSION['user'])) {
+    if (!Authenticate::getCurrent()) {
       http_response_code(403);
       return false;
     }

@@ -3,12 +3,11 @@
 namespace App\Controllers;
 
 use App\Controller;
-use App\React;
 
 class HomeController extends Controller
 {
   public function index()
   {
-    return React::render("Home");
+    $this->send(file_get_contents(__DIR__ . "/../../dist/index.html"));
   }
 }

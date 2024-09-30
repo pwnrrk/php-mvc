@@ -1,0 +1,6 @@
+<?php
+if (!is_dir("dist")) {
+  error_log("Building vite for first start");
+  shell_exec("npm run build");
+}
+shell_exec('php -S [::1]:8000 -t dist');

@@ -1,35 +1,28 @@
 <?php
 
-use App\Controllers\API\JournalController;
-use App\Controllers\DocsController;
+use App\Controllers\AuthController;
+use App\Controllers\FileController;
+use App\Controllers\GraphQLController;
 use App\Controllers\HomeController;
-use App\Controllers\ExampleController;
 use App\Middlewares\AuthMiddleware;
 use App\Router;
 
 $router = new Router();
 
-$router->get("/", HomeController::class, 'index');
 
-$router->group("/docs", function (Router $docs) {
-  $docs->get("/", DocsController::class, "index");
-  $docs->get("/{name}", DocsController::class, "show");
-});
+$router->post("/graphql", GraphQLController::class, "index", [AuthMiddleware::class]);
 
-$router->group("/example", function (Router $example) {
-  $example->get("/", ExampleController::class, 'index');
-  $example->get("/create", ExampleController::class, 'create');
-  $example->get("/view/{id}", ExampleController::class, 'show');
-});
-
-$router->group("/api", function (Router $api) {
-  $api->group("/journals", function (Router $journal) {
-    $journal->get("/", JournalController::class, "index");
-    $journal->post("/", JournalController::class, "create");
-    $journal->get("/{id}", JournalController::class, "get");
-    $journal->put("/{id}", JournalController::class, "update");
-    $journal->delete("/{id}", JournalController::class, "destroy");
-  });
+$router->group("/file", function (Router $fileRouter) {
+    $fileRouter->get("/avatar/{code}", FileController::class, 'getAvatar');
+    $fileRouter->post("/{destination}", FileController::class, "save");
+    $fileRouter->post("/", FileController::class, "save");
 }, [AuthMiddleware::class]);
+
+$router->group("/auth", function (Router $authRouter) {
+    $authRouter->post("/", AuthController::class, 'login');
+    $authRouter->delete("/", AuthController::class, 'logout');
+});
+
+$router->get('.*', HomeController::class, 'index');
 
 $router->dispatch();

@@ -1,16 +1,24 @@
 import "../css/index.css";
 import { createRoot } from "react-dom/client";
-import Layout from "./components/layout/Layout";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { StrictMode } from "react";
 
-const page = (window as any)._react_page;
-const props = (window as any)._react_props;
+const client = new ApolloClient({
+    uri: import.meta.env.PROD
+        ? import.meta.env.BASE_URL + "/graphql"
+        : "/graphql",
+    cache: new InMemoryCache(),
+});
 
 const root = createRoot(document.getElementById("app") as HTMLElement);
-import(`./Pages/${page}`).then((Page) => {
-  root.render(
-    <Layout>
-      <Page.default {...props} />
-    </Layout>,
-  );
-  document.getElementById("react-value")?.remove();
-});
+root.render(
+    <StrictMode>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
+            <ApolloProvider client={client}>
+                <App />
+            </ApolloProvider>
+        </BrowserRouter>
+    </StrictMode>
+);

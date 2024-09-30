@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <title>Vite App</title>
-        <script src="./src/Resources/ts/index.tsx" defer type="module"></script>
     </head>
     <body>
         <div id="app"></div>

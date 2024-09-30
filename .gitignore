@@ -19,4 +19,4 @@ node_modules/
 # Ignore any user-specific files
 .DS_Store
 Thumbs.db
-public/dist
+dist

@@ -1,5 +1,5 @@
 import hljs from "highlight.js";
-import "highlight.js/styles/nord.css";
+import "highlight.js/styles/github.css";
 import { BASE_URL } from "../../constant";
 
 export default function BuildYourApp() {
